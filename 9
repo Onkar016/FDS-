@@ -1,0 +1,59 @@
+#include <iostream>
+#include <stack>
+
+
+using namespace std;
+
+void printOriginalAndReversed(const string& input) {
+    stack<char> charStack;
+
+    for (char c : input) {
+        charStack.push(c);
+    } 
+
+    cout << "Original String: " << input << endl;
+    cout << "Reversed String: ";
+    while (!charStack.empty())
+    {
+        cout << charStack.top();
+        charStack.pop();
+    }
+    cout << endl;
+}
+
+bool isPalindrome(const string& input) {
+    stack<char> charStack;
+    for (char c : input) {
+        if (isalnum(c)) {
+            charStack.push(tolower(c));
+        }
+    }
+
+    for (char c : input) {
+        if (isalnum(c)) {
+            if (charStack.top() != tolower(c)) {
+                return false;
+            }
+            charStack.pop();
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    string inputString;
+
+    cout << "Enter a string: ";
+    getline(cin,inputString);
+
+    printOriginalAndReversed(inputString);
+
+    if (isPalindrome(inputString)) {
+        cout << "The entered string is a palindrome." << endl;
+    } else {
+        cout << "The entered string is not a palindrome." << endl;
+    }
+
+    return 0;
+}
